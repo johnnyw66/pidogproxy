@@ -12,7 +12,6 @@
 
 # Look left and Right (Yaw 40, -40)
 ./k9_cmd.sh head '{"yaw": 40, "speed": 80}'
-sleep 1
 ./k9_cmd.sh sleep '{"duration": 1}'
 
 ./k9_cmd.sh head '{"yaw": -40, "speed": 80}'
