@@ -1,0 +1,6 @@
+aiomqtt
+python-dotenv
+# Note: pidog and robot-hat must be installed via SunFounder's 
+# official installers as they require system-level drivers.
+
+
