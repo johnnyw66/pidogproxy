@@ -1,3 +1,5 @@
+./k9_cmd.sh tts '{"text": "Starting this test"}'
+./k9_cmd.sh sleep '{"duration": 10}'
 
 # Make him sit
 #./k9_cmd.sh action '{"name": "sit", "speed": 1000}'
@@ -11,16 +13,23 @@
 # Look left and Right (Yaw 40, -40)
 ./k9_cmd.sh head '{"yaw": 40, "speed": 80}'
 sleep 1
+./k9_cmd.sh sleep '{"duration": 1}'
+
 ./k9_cmd.sh head '{"yaw": -40, "speed": 80}'
-sleep 1
+./k9_cmd.sh sleep '{"duration": 1}'
+
 ./k9_cmd.sh head '{"yaw": 40, "speed": 80}'
-sleep 1
+./k9_cmd.sh sleep '{"duration": 1}'
+
 ./k9_cmd.sh head '{"yaw": -40, "speed": 80}'
-sleep 1
+./k9_cmd.sh sleep '{"duration": 1}'
+
 ./k9_cmd.sh head '{"yaw": 40, "speed": 80}'
-sleep 1
+./k9_cmd.sh sleep '{"duration": 1}'
+
 ./k9_cmd.sh head '{"yaw": -40, "speed": 80}'
-sleep 4
+./k9_cmd.sh sleep '{"duration": 4}'
+
 
 # Look down and tilt (Pitch -20, Roll 20)
 ./k9_cmd.sh head '{"pitch": -20, "roll": 20}'
@@ -28,7 +37,8 @@ sleep 4
 # Reset head to center
 ./k9_cmd.sh head '{"yaw": 0, "roll": 0, "pitch": 0}'
 
-sleep 10
+./k9_cmd.sh sleep '{"duration": 10}'
+
 
 ./k9_cmd.sh tts '{"text": "Nothing found"}'
 
