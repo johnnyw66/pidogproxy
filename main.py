@@ -46,6 +46,7 @@ class PiDogProxy:
                     await asyncio.to_thread(self.tts.say, p.get("text", ""))
 
                 elif target == "rgb":
+
                     await asyncio.to_thread(
                         self.dog.rgb_strip.set_mode, 
                         style=p.get("style", "breath"), 
@@ -54,13 +55,22 @@ class PiDogProxy:
                         brightness=p.get("brightness", 0.5)
                     )
                 elif target == "head":
-                     yaw = p.get("yaw", 0)
-                     roll = p.get("roll", 0)
-                     pitch = p.get("pitch", 0)
-                     speed = p.get("speed", 50)
-                     # Execute the head move
-                     await asyncio.to_thread(self.dog.head_move, [[yaw, roll, pitch]], speed=speed)
-                     await asyncio.to_thread(self.dog.wait_head_done)
+
+                    yaw = p.get("yaw", 0)
+                    roll = p.get("roll", 0)
+                    pitch = p.get("pitch", 0)
+                    speed = p.get("speed", 50)
+                    # Execute the head move
+                    await asyncio.to_thread(self.dog.head_move, [[yaw, roll, pitch]], speed=speed)
+                    await asyncio.to_thread(self.dog.wait_head_done)
+
+                elif target == "sleep":
+
+                    duration = p.get("duration", 0)
+                    await asyncio.sleep(duration)
+
+                else:
+                    logging.info(f"Warning unrecognised command {target}")
 
             except Exception as e:
                 logger.error(f"Hardware Logic Error: {e}")
