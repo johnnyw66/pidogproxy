@@ -82,13 +82,20 @@ class PiDogProxy:
             finally:
                 self.cmd_queue.task_done()
 
+
+    def listen(self):
+        if self.dog.ears.isdetected():
+            return self.dog.ears.read()
+        return -1
+
     async def sensor_publisher(self, client):
         """Streams sensor data to MQTT."""
         while True:
             try:
                 dist = await asyncio.to_thread(self.dog.read_distance)
                 touch = await asyncio.to_thread(self.dog.dual_touch.read)
-                payload = {"ultrasonic": dist, "touch": touch}
+                angle = await asyncio.to_thread(self.listen)
+                payload = {"ultrasonic": dist, "touch": touch, "sound": angle}
                 await client.publish("pidog/out/state", payload=json.dumps(payload))
                 
                 await asyncio.sleep(0.2)
