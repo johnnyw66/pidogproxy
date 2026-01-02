@@ -1,0 +1,9 @@
+# MQTT Broker Connection Details
+# Complete and rename as '.env'
+MQTT_BROKER=your_mqtt_broker.com
+MQTT_PORT=1883
+MQTT_USER=your_mqtt_user
+MQTT_PASS=your_mqtt_password
+
+
+
