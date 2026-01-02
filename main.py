@@ -12,6 +12,11 @@ from pidog.preset_actions import howling
 
 # Load credentials from .env file
 load_dotenv()
+abspath = os.path.abspath(os.path.dirname(__file__))
+print(abspath)
+os.chdir(abspath)
+
+logging.info("\033[033mNote that you need to run with \"sudo\", otherwise there may be no sound.\033[m")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("PiDogProxy")
@@ -64,6 +69,12 @@ class PiDogProxy:
                     # Execute the head move
                     await asyncio.to_thread(self.dog.head_move, [[yaw, roll, pitch]], speed=speed)
                     await asyncio.to_thread(self.dog.wait_head_done)
+
+                elif target == "speak":
+
+                    asset = p.get("asset", "")
+                    volume = p.get("volume", 50)
+                    await asyncio.to_thread(self.dog.speak, asset, volume = volume)
 
                 elif target == "sleep":
 

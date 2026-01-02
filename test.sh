@@ -1,3 +1,7 @@
+#./k9_cmd.sh howling '{"duration": 10}'
+
+./k9_cmd.sh speak '{"asset": "../sounds/angry", "volume": 90}'
+
 ./k9_cmd.sh tts '{"text": "Starting this test"}'
 ./k9_cmd.sh sleep '{"duration": 10}'
 
