@@ -7,6 +7,7 @@ from aiomqtt import Client, MqttError
 from pidog import Pidog
 from robot_hat.tts import Espeak
 
+from pidog.preset_actions import howling
 
 
 # Load credentials from .env file
@@ -68,6 +69,10 @@ class PiDogProxy:
 
                     duration = p.get("duration", 0)
                     await asyncio.sleep(duration)
+
+                elif target == 'howling':
+
+                    await asyncio.to_thread(howling, self.dog)
 
                 else:
                     logging.info(f"Warning unrecognised command {target}")
