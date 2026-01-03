@@ -93,11 +93,21 @@ class PiDogProxy:
             finally:
                 self.cmd_queue.task_done()
 
+    async def announce(self, client, topic, message):
+        try:
+            payload = {"payload": message}
+            await client.publish(topic, payload=json.dumps(payload))
+            await asyncio.sleep(0.2)
+        except Exception as e:
+            logger.error(f"announce error {e}")
+            await asyncio.sleep(1)
 
     def listen(self):
         if self.dog.ears.isdetected():
             return self.dog.ears.read()
         return -1
+
+        
 
     async def sensor_publisher(self, client):
         """Streams sensor data to MQTT."""
@@ -126,7 +136,9 @@ class PiDogProxy:
                 ) as client:
                     logger.info("K-9 Link Established.")
                     await client.subscribe("pidog/in/#")
-                    
+
+                    asyncio.create_task(self.announce(client,"pidog/announce","wakeup"))
+
                     # Run sensor polling as a concurrent task
                     sensor_task = asyncio.create_task(self.sensor_publisher(client))
                     
